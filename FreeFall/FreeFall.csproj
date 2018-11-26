@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+     <PackageReference Include="MonoGame.Framework.Portable" Version="3.6.0.1625" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Framework\" />
+    <Folder Include="Framework\Screens\" />
+    <Folder Include="Objects\" />
+  </ItemGroup>
+</Project>
