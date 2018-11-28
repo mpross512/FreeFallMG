@@ -7,6 +7,7 @@ namespace FreeFall.Framework.Screens
     {
         public TitleScreen()
         {
+
         }
 
         public override void Initialize()

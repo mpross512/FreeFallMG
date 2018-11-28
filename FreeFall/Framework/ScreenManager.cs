@@ -2,14 +2,13 @@
 using FreeFall.Framework.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FreeFall.Framework
 {
 
     public class ScreenManager
     {
-
-        private static ScreenManager screenManager;
 
         private Screen currentScreen;
 
@@ -18,10 +17,15 @@ namespace FreeFall.Framework
             currentScreen = new TitleScreen();
         }
 
-        public static ScreenManager GetInstance() {
-            if (screenManager == null)
-                screenManager = new ScreenManager();
-            return screenManager;
+        public static ScreenManager Instance {
+            get {
+                if (Instance == null)
+                    Instance = new ScreenManager();
+                return Instance;
+            }
+            set {
+                Instance = value;
+            }
         }
 
         public void Initialize() {

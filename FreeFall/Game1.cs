@@ -23,9 +23,6 @@ namespace FreeFall
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = true;
-
-
-
         }
 
         /// <summary>
@@ -36,7 +33,10 @@ namespace FreeFall
         /// </summary>
         protected override void Initialize()
         {
-            ScreenManager.GetInstance().Initialize();
+            InitializeComponents();
+
+            ScreenManager.Instance.Initialize();
+
             base.Initialize();
         }
 
@@ -46,7 +46,7 @@ namespace FreeFall
         /// </summary>
         protected override void LoadContent()
         {
-            ScreenManager.GetInstance().LoadContent(this.Content);
+            ScreenManager.Instance.LoadContent(this.Content);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace FreeFall
             }
 
 
-            ScreenManager.GetInstance().Update(gameTime);
+            ScreenManager.Instance.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,9 +78,13 @@ namespace FreeFall
         {
             GraphicsDevice.Clear(Color.Wheat);
 
-            ScreenManager.GetInstance().Draw(gameTime);
+            ScreenManager.Instance.Draw(gameTime);
 
             base.Draw(gameTime);
+        }
+
+        private void InitializeComponents() {
+            GameComponents.Instance.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
         }
     }
 }
