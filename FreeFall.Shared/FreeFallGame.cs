@@ -3,22 +3,22 @@ using System;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
-using FreeFall.Framework;
 
 #endregion
 
-namespace FreeFall
+namespace FreeFall.Shared
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class FreeFallGame : Game
     {
         GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
 
-        public Game1()
+        public FreeFallGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -33,10 +33,7 @@ namespace FreeFall
         /// </summary>
         protected override void Initialize()
         {
-            InitializeComponents();
-
-            ScreenManager.Instance.Initialize();
-
+            // TODO: Add your initialization logic here
             base.Initialize();
         }
 
@@ -46,7 +43,10 @@ namespace FreeFall
         /// </summary>
         protected override void LoadContent()
         {
-            ScreenManager.Instance.LoadContent(this.Content);
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //TODO: use this.Content to load your game content here 
         }
 
         /// <summary>
@@ -58,15 +58,14 @@ namespace FreeFall
         {
             // For Mobile devices, this logic will close the Game when the Back button is pressed
             // Exit() is obsolete on iOS
+#if !__IOS__ && !__TVOS__
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-
-
-            ScreenManager.Instance.Update(gameTime);
-
+#endif
+            // TODO: Add your update logic here			
             base.Update(gameTime);
         }
 
@@ -76,15 +75,11 @@ namespace FreeFall
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Wheat);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            ScreenManager.Instance.Draw(gameTime);
+            //TODO: Add your drawing code here
 
             base.Draw(gameTime);
-        }
-
-        private void InitializeComponents() {
-            GameComponents.Instance.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
         }
     }
 }
