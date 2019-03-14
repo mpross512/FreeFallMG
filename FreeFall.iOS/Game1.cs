@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace FreeFall_iOS.iOS
+namespace FreeFall.iOS.iOS
 {
     /// <summary>
     /// This is the main type for your game.

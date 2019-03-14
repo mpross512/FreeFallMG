@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("FreeFall_Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("FreeFall.Android.Resource", IsApplication=true)]
 
-namespace FreeFall_Android
+namespace FreeFall.Android
 {
 	
 	

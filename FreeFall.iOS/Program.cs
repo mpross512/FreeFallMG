@@ -1,9 +1,8 @@
 ﻿using System;
 using Foundation;
 using UIKit;
-using FreeFall;
 
-namespace FreeFall_iOS.iOS
+namespace FreeFall.iOS.iOS
 {
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
@@ -24,7 +23,7 @@ namespace FreeFall_iOS.iOS
             UIApplication.Main(args, null, "AppDelegate");
         }
 
-        public override void FinishedLaunching(UIApplication application)
+        public override void FinishedLaunching(UIApplication app)
         {
             RunGame();
         }

@@ -2,11 +2,10 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using FreeFall;
 
-namespace FreeFall_Android.Android
+namespace FreeFall.Android.Android
 {
-    [Activity(Label = "FreeFall_Android.Android"
+    [Activity(Label = "FreeFall.Android.Android"
         , MainLauncher = true
         , Icon = "@drawable/icon"
         , Theme = "@style/Theme.Splash"
@@ -19,7 +18,7 @@ namespace FreeFall_Android.Android
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            var g = new FreeFall.Game1();
+            var g = new Game1();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
         }
