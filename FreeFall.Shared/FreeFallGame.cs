@@ -3,7 +3,6 @@ using System;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 
 #endregion
@@ -16,13 +15,47 @@ namespace FreeFall.Shared
     public class FreeFallGame : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+
+        public enum Platform
+        {
+            MAC,
+            WINDOWS,
+            ANDROID,
+            IOS
+        }
+
+        public Platform CurrentPlatform { get; private set; }
+
+        public static FreeFallGame Instance { get; private set; }
 
         public FreeFallGame()
         {
+            Instance = this;
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
+        }
+
+        public FreeFallGame(Platform platform)
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            graphics.IsFullScreen = false;
+
+            CurrentPlatform = platform;
+            switch(CurrentPlatform)
+            {
+                case Platform.MAC:
+                    graphics.PreferredBackBufferHeight = 1920;
+                    graphics.PreferredBackBufferWidth = 1080 / 2;
+                    Console.WriteLine("This is a Mac");
+                    break;
+                case Platform.IOS:
+                    Console.WriteLine("This is an iPhone");
+                    break;
+            }
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -75,7 +108,7 @@ namespace FreeFall.Shared
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.PaleVioletRed);
 
             //TODO: Add your drawing code here
 

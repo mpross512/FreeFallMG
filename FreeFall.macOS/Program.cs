@@ -1,6 +1,7 @@
 ﻿using System;
 using FreeFall.Shared;
 
+
 namespace FreeFall.macOS
 {
     /// <summary>
@@ -14,8 +15,13 @@ namespace FreeFall.macOS
         [STAThread]
         static void Main()
         {
-            using (var game = new FreeFallGame())
+            using (var game = new FreeFallGame(FreeFallGame.Platform.MAC))
+            {
+                game.IsMouseVisible = true;
+                game.Window.AllowUserResizing = true;
+                //game.Window.Title = "FreeFall";
                 game.Run();
+            }
         }
     }
 }
