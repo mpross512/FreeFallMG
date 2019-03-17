@@ -10,11 +10,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)FreeFallGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\Screen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\ScreenManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\TitleScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\GameScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Input\InputHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\UtilityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Framework\Input\" />
   </ItemGroup>
 </Project>

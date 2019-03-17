@@ -1,6 +1,8 @@
 ﻿#region Using Statements
 using System;
-
+using FreeFall.Shared.Framework.Input;
+using FreeFall.Shared.Framework.Screens;
+using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,6 +17,8 @@ namespace FreeFall.Shared
     public class FreeFallGame : Game
     {
         GraphicsDeviceManager graphics;
+        private ScreenManager screenManager;
+        private UtilityManager utilities;
 
         public enum Platform
         {
@@ -28,20 +32,19 @@ namespace FreeFall.Shared
 
         public static FreeFallGame Instance { get; private set; }
 
-        public FreeFallGame()
+        public FreeFallGame() : this(Platform.WINDOWS) { }
+
+        public FreeFallGame(Platform platform)
         {
             Instance = this;
 
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = false;
-        }
 
-        public FreeFallGame(Platform platform)
-        {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            graphics.IsFullScreen = false;
+
+            screenManager = new ScreenManager();
+            utilities = new UtilityManager(this);
+
 
             CurrentPlatform = platform;
             switch(CurrentPlatform)
@@ -49,10 +52,12 @@ namespace FreeFall.Shared
                 case Platform.MAC:
                     graphics.PreferredBackBufferHeight = 1920;
                     graphics.PreferredBackBufferWidth = 1080 / 2;
+                    graphics.IsFullScreen = false;
                     Console.WriteLine("This is a Mac");
                     break;
                 case Platform.IOS:
                     Console.WriteLine("This is an iPhone");
+                    graphics.IsFullScreen = true;
                     break;
             }
             graphics.ApplyChanges();
@@ -68,6 +73,9 @@ namespace FreeFall.Shared
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+
+            utilities.Initialize();
+            screenManager.Initialize();
         }
 
         /// <summary>
@@ -95,8 +103,10 @@ namespace FreeFall.Shared
                 Exit();
             }
         #endif
-            // TODO: Add your update logic here			
-            base.Update(gameTime);
+            
+            InputHandler.Instance.Update(gameTime);
+
+
         }
 
         /// <summary>
@@ -105,11 +115,12 @@ namespace FreeFall.Shared
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.PaleVioletRed);
+            graphics.GraphicsDevice.Clear(Color.Aquamarine);
 
-            //TODO: Add your drawing code here
-
-            base.Draw(gameTime);
+            screenManager.CurrentScreen.Draw(gameTime);
+        
         }
+
+
     }
 }
