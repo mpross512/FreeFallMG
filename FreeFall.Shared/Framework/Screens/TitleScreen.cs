@@ -21,7 +21,7 @@ namespace FreeFall.Shared.Framework.Screens
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(rectangle, new Rectangle(0, 0, 800, 400), Color.Chocolate);
+            spriteBatch.Draw(rectangle, new Rectangle(0, 0, 60, 60), Color.Chocolate);
 
             spriteBatch.End();
         }

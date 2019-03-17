@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Input\InputHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\UtilityManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Entity.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
@@ -26,5 +28,6 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Input\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
   </ItemGroup>
 </Project>

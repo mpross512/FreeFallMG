@@ -6,6 +6,7 @@ using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 
 #endregion
 
@@ -18,7 +19,8 @@ namespace FreeFall.Shared
     {
         GraphicsDeviceManager graphics;
         private ScreenManager screenManager;
-        private UtilityManager utilities;
+        private UtilityManager utilityManager;
+        private RenderTarget2D scene;
 
         public enum Platform
         {
@@ -43,8 +45,7 @@ namespace FreeFall.Shared
 
 
             screenManager = new ScreenManager();
-            utilities = new UtilityManager(this);
-
+            utilityManager = new UtilityManager(this);
 
             CurrentPlatform = platform;
             switch(CurrentPlatform)
@@ -73,8 +74,9 @@ namespace FreeFall.Shared
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            scene = new RenderTarget2D(graphics.GraphicsDevice, UtilityManager.SCREEN_WIDTH, UtilityManager.SCREEN_HEIGHT);
 
-            utilities.Initialize();
+            utilityManager.Initialize();
             screenManager.Initialize();
         }
 
@@ -115,9 +117,16 @@ namespace FreeFall.Shared
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.Aquamarine);
+            GraphicsDevice.SetRenderTarget(scene);
+            GraphicsDevice.Clear(Color.Aquamarine);
 
             screenManager.CurrentScreen.Draw(gameTime);
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            UtilityManager.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
+            UtilityManager.SpriteBatch.Draw(scene, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            UtilityManager.SpriteBatch.End();
         
         }
 

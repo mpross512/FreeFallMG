@@ -13,6 +13,9 @@ namespace FreeFall.Shared.Utilities
 
         public static SpriteBatch SpriteBatch { get; private set; }
 
+        public const int SCREEN_WIDTH = 144;
+        public const int SCREEN_HEIGHT = 256;
+
         public UtilityManager(FreeFallGame gameInstance)
         {
             Instance = this;

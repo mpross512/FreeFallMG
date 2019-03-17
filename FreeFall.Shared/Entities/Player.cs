@@ -1,45 +1,37 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input.Touch;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace FreeFall.Shared.Framework.Screens
+namespace FreeFall.Shared.Entities
 {
-    public class GameScreen : Screen
+    public class Player : Entity
     {
 
-        public GameScreen()
+
+        private const int VELOCITY = 20;
+        
+        public Player()
         {
+            texture = new Texture2D(FreeFallGame.Instance.GraphicsDevice, 1, 1);
         }
 
         public override void Draw(GameTime gameTime)
         {
-
         }
 
         public override void Initialize()
         {
-            base.Initialize();
         }
 
         public override void LoadContent(ContentManager content)
         {
-            
         }
 
         public override void Update(GameTime gameTime)
-        { 
-        
-        }
-
-        public override void HandleTouch(Vector2 position)
         {
-            
         }
 
-        public override void HandleTouch(Vector2 position, TouchLocationState touchState)
-        {
 
-        }
     }
 }
