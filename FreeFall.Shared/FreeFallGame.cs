@@ -54,10 +54,8 @@ namespace FreeFall.Shared
                     graphics.PreferredBackBufferHeight = 1920;
                     graphics.PreferredBackBufferWidth = 1080 / 2;
                     graphics.IsFullScreen = false;
-                    Console.WriteLine("This is a Mac");
                     break;
                 case Platform.IOS:
-                    Console.WriteLine("This is an iPhone");
                     graphics.IsFullScreen = true;
                     break;
             }
@@ -106,7 +104,8 @@ namespace FreeFall.Shared
             }
         #endif
             
-            InputHandler.Instance.Update(gameTime);
+            //InputHandler.Instance.Update(gameTime);
+            ScreenManager.Instance.CurrentScreen.Update(gameTime);
 
 
         }

@@ -34,11 +34,7 @@ namespace FreeFall.Shared.Framework.Input
 
         public void Update(GameTime gameTime)
         {
-            foreach(TouchLocation touch in TouchPanel.GetState())
-            {    
-                Console.WriteLine("X: {0} + Y: {1}", touch.Position.X, touch.Position.Y);
-                ScreenManager.Instance.CurrentScreen.HandleTouch(touch.Position, touch.State);
-            }
+
         }
 
 

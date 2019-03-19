@@ -20,10 +20,6 @@ namespace FreeFall.Shared.Framework.Screens {
 
         public abstract void Draw(GameTime gameTime);
 
-        public abstract void HandleTouch(Vector2 position);
-
-        public abstract void HandleTouch(Vector2 position, TouchLocationState touchState);
-
     }
 
 }

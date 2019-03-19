@@ -10,6 +10,8 @@ namespace FreeFall.Shared.Entities
 
         protected Texture2D texture;
 
+        protected SpriteBatch spriteBatch;
+
         public abstract void Initialize();
 
         public abstract void LoadContent(ContentManager content);

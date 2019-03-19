@@ -26,21 +26,24 @@ namespace FreeFall.Shared.Framework.Screens
             spriteBatch.End();
         }
 
-        public override void HandleTouch(Vector2 position)
+        public void HandleTouch()
         {
-            
-        }
-
-        public override void HandleTouch(Vector2 position, TouchLocationState touchState)
-        {
-            if (position.Y < 1200 && touchState == TouchLocationState.Released)
-                ScreenManager.Instance.CurrentScreen = new GameScreen();
+            foreach (TouchLocation touch in TouchPanel.GetState())
+            {
+                //Console.WriteLine("X: {0} + Y: {1}", touch.Position.X, touch.Position.Y);
+                if (touch.State == TouchLocationState.Released)
+                    ScreenManager.Instance.CurrentScreen = new GameScreen();
+            }
         }
 
         public override void Initialize()
         {
             base.Initialize();
             rectangle.SetData(new Color[] { Color.White });
+            TouchPanel.DisplayWidth = UtilityManager.SCREEN_WIDTH;
+            TouchPanel.DisplayHeight = UtilityManager.SCREEN_HEIGHT;
+            TouchPanel.EnableMouseTouchPoint = true;
+
         }
 
         public override void LoadContent(ContentManager content)
@@ -49,6 +52,7 @@ namespace FreeFall.Shared.Framework.Screens
 
         public override void Update(GameTime gameTime)
         {
+            HandleTouch();
         }
 
 

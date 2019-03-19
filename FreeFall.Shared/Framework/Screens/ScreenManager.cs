@@ -1,4 +1,5 @@
 ﻿using System;
+using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -8,18 +9,30 @@ namespace FreeFall.Shared.Framework.Screens
     {
 
         public static ScreenManager Instance { get; private set; }
+        private Screen currentScreen;
+
 
         public ScreenManager()
         {
             Instance = this;
         }
 
-        public Screen CurrentScreen { get; set; }
+        public Screen CurrentScreen
+        {
+            get
+            {
+                return currentScreen;
+            }
+            set
+            {
+                currentScreen = value;
+                currentScreen.Initialize();
+            }
+        }
 
         public void Initialize()
         {
             CurrentScreen = new TitleScreen();
-            CurrentScreen.Initialize();
         }
 
         public void LoadContent(ContentManager content)
