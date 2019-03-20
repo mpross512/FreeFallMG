@@ -1,4 +1,5 @@
 ﻿using System;
+using FreeFall.Shared.Framework.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,8 +13,6 @@ namespace FreeFall.Shared.Entities
         public const int VELOCITY = 150;
         public const int PLAYER_WIDTH = 30;
         public const int PLAYER_HEIGHT = 50;
-        private Vector2 position;
-
 
         public Vector2 Position
         {
@@ -28,8 +27,7 @@ namespace FreeFall.Shared.Entities
         }
 
         public int VelocityX { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public bool Shield { get; set; }
 
         public static Player Instance { get; private set; }
 
@@ -37,6 +35,7 @@ namespace FreeFall.Shared.Entities
         {
             Instance = this;
             texture = new Texture2D(FreeFallGame.Instance.GraphicsDevice, 1, 1);
+            EntityType = EntityTypes.PLAYER;
         }
 
         public override void Initialize()
@@ -60,7 +59,18 @@ namespace FreeFall.Shared.Entities
 
         public override void Draw(GameTime gameTime)
         {
-            Utilities.UtilityManager.SpriteBatch.Draw(texture, new Rectangle((int)(position.X), (int)position.Y, Width, Height), Color.IndianRed);
+            spriteBatch.Draw(texture, new Rectangle((int) position.X, (int)position.Y, Width, Height), Color.IndianRed);
+        }
+
+        public void HandleCollision(Entity entity)
+        {
+            if(entity.EntityType == EntityTypes.DRONE)
+            {
+                if(!Shield)
+                {
+                    ScreenManager.Instance.CurrentScreen = new GameOverScreen();
+                }
+            }
         }
 
 

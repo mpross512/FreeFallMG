@@ -27,6 +27,7 @@ namespace FreeFall.Shared.Framework.Screens
             {
                 currentScreen = value;
                 currentScreen.Initialize();
+                currentScreen.LoadContent(FreeFallGame.Instance.Content);
             }
         }
 

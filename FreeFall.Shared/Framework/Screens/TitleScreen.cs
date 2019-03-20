@@ -3,6 +3,7 @@ using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 namespace FreeFall.Shared.Framework.Screens
@@ -28,6 +29,9 @@ namespace FreeFall.Shared.Framework.Screens
 
         public void HandleTouch()
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                ScreenManager.Instance.CurrentScreen = new GameScreen();
+
             foreach (TouchLocation touch in TouchPanel.GetState())
             {
                 //Console.WriteLine("X: {0} + Y: {1}", touch.Position.X, touch.Position.Y);

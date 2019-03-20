@@ -3,6 +3,7 @@ using FreeFall.Shared.Entities;
 using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 
 namespace FreeFall.Shared.Framework.Screens
@@ -13,17 +14,19 @@ namespace FreeFall.Shared.Framework.Screens
         private EntityManager entityManager;
 
         private bool alternateControlScheme, movingLeft;
+        private Texture2D test;
 
         public GameScreen()
         {
             entityManager = new EntityManager();
             alternateControlScheme = true;
-            movingLeft = true;
+            movingLeft = false;
         }
 
         public override void Draw(GameTime gameTime)
         {
             UtilityManager.SpriteBatch.Begin();
+            UtilityManager.SpriteBatch.Draw(test, new Rectangle(0, 0, 144, 256), Color.White);
 
             entityManager.Draw(gameTime);
 
@@ -39,6 +42,7 @@ namespace FreeFall.Shared.Framework.Screens
         public override void LoadContent(ContentManager content)
         {
             entityManager.LoadContent(content);
+            test = content.Load<Texture2D>("Images/TestTexture");
         }
 
         public override void Update(GameTime gameTime)

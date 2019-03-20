@@ -21,6 +21,7 @@ namespace FreeFall.Shared
         private ScreenManager screenManager;
         private UtilityManager utilityManager;
         private RenderTarget2D scene;
+        private float resolutionProportion;
 
         public enum Platform
         {
@@ -60,6 +61,9 @@ namespace FreeFall.Shared
                     break;
             }
             graphics.ApplyChanges();
+
+            resolutionProportion = (float) Window.ClientBounds.Width / UtilityManager.SCREEN_WIDTH;
+            //Console.WriteLine("Window Size: {0} Screen Width: {1} Proportion: {2}", Window.ClientBounds.Width, UtilityManager.SCREEN_WIDTH, resolutionProportion);
         }
 
         /// <summary>
@@ -102,8 +106,11 @@ namespace FreeFall.Shared
             {
                 Exit();
             }
-        #endif
-            
+#endif
+
+            resolutionProportion = (float)Window.ClientBounds.Width / UtilityManager.SCREEN_WIDTH;
+
+
             //InputHandler.Instance.Update(gameTime);
             ScreenManager.Instance.CurrentScreen.Update(gameTime);
 
@@ -124,8 +131,15 @@ namespace FreeFall.Shared
             GraphicsDevice.SetRenderTarget(null);
 
             UtilityManager.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
-            UtilityManager.SpriteBatch.Draw(scene, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            UtilityManager.SpriteBatch.Draw(
+                scene, 
+                new Rectangle(0, 0, 
+                    (int) (resolutionProportion * (float) UtilityManager.SCREEN_WIDTH), 
+                    (int) (resolutionProportion * (float) UtilityManager.SCREEN_HEIGHT)), 
+                Color.White);
             UtilityManager.SpriteBatch.End();
+
+            //Console.WriteLine("Actual Resolution: {0} Height: {1} Proportion: {2}", Window.ClientBounds.Width, Window.ClientBounds.Height, (float) Window.ClientBounds.Height / Window.ClientBounds.Width);
         
         }
 

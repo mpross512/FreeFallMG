@@ -109,11 +109,22 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GameThumbnail.png" />
+    <BundleResource Include="Content\Images\TestTexture.png" />
+    <BundleResource Include="Content\Images\Drone.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\LaunchImage-1.launchimage\Contents.json" />
     <ImageAsset Include="Assets.xcassets\LaunchImage-1.launchimage\Default.png" />
     <ImageAsset Include="Assets.xcassets\LaunchImage-1.launchimage\FreeFall Launch Image - Retina 5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Content\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </MonoGameContentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

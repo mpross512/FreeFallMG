@@ -1,4 +1,5 @@
 ﻿using System;
+using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,9 +9,22 @@ namespace FreeFall.Shared.Entities
     public abstract class Entity
     {
 
-        protected Texture2D texture;
+        public enum EntityTypes
+        {
+            PLAYER,
+            DRONE
+        }
 
-        protected SpriteBatch spriteBatch;
+        public EntityTypes EntityType { get; protected set; }
+
+        protected Texture2D texture;
+        protected SpriteBatch spriteBatch = UtilityManager.SpriteBatch;
+        protected Vector2 position = Vector2.Zero;
+
+        public Rectangle BoundingRectangle { get; private set; }
+
+        protected int Width { get; set; }
+        protected int Height { get; set; }
 
         public abstract void Initialize();
 
@@ -19,6 +33,5 @@ namespace FreeFall.Shared.Entities
         public abstract void Update(GameTime gameTime);
 
         public abstract void Draw(GameTime gameTime);
-
     }
 }

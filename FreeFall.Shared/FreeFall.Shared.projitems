@@ -19,12 +19,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\EntityManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Drone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\GameOverScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
