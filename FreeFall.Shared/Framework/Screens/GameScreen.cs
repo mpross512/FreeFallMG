@@ -26,7 +26,7 @@ namespace FreeFall.Shared.Framework.Screens
         public override void Draw(GameTime gameTime)
         {
             UtilityManager.SpriteBatch.Begin();
-            UtilityManager.SpriteBatch.Draw(test, new Rectangle(0, 0, 144, 256), Color.White);
+            //UtilityManager.SpriteBatch.Draw(test, new Rectangle(0, 0, 144, 256), Color.White);
 
             entityManager.Draw(gameTime);
 

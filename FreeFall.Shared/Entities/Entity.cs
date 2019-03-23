@@ -21,7 +21,14 @@ namespace FreeFall.Shared.Entities
         protected SpriteBatch spriteBatch = UtilityManager.SpriteBatch;
         protected Vector2 position = Vector2.Zero;
 
-        public Rectangle BoundingRectangle { get; private set; }
+        public Rectangle BoundingRectangle
+        {
+            get
+            {
+                return boundingRectangle;
+            }
+        }
+        protected Rectangle boundingRectangle;
 
         protected int Width { get; set; }
         protected int Height { get; set; }
