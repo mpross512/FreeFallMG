@@ -31,8 +31,8 @@ namespace FreeFall.Shared.Entities
 
         public override void Draw(GameTime gameTime)
         {
-            //spriteBatch.Draw(texture, boundingRectangle, Color.White);
-            spriteBatch.Draw(Player.Instance.Texture, new Rectangle(0, (int)position.Y + (DRONE_HEIGHT), UtilityManager.SCREEN_WIDTH, DRONE_HEIGHT * 7), Color.BlanchedAlmond);
+            spriteBatch.Draw(texture, boundingRectangle, Color.White);
+            //spriteBatch.Draw(Player.Instance.Texture, new Rectangle(0, (int)position.Y + (DRONE_HEIGHT), UtilityManager.SCREEN_WIDTH, DRONE_HEIGHT * 7), Color.BlanchedAlmond);
         }
 
         public override void Initialize() 

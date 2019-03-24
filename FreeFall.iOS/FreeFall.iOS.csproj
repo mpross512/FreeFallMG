@@ -111,6 +111,7 @@
     <BundleResource Include="GameThumbnail.png" />
     <BundleResource Include="Content\Images\TestTexture.png" />
     <BundleResource Include="Content\Images\Drone.png" />
+    <BundleResource Include="Content\Images\MalePlayer.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\LaunchImage-1.launchimage\Contents.json" />

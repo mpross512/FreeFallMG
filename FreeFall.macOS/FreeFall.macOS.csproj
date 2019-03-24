@@ -102,6 +102,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="Content\Images\MalePlayer.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />

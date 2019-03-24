@@ -10,6 +10,7 @@ namespace FreeFall.Shared.Framework.Screens
 
         public static ScreenManager Instance { get; private set; }
         private Screen currentScreen;
+        public static EntityManager EntityManager { get; private set; }
 
 
         public ScreenManager()
@@ -33,6 +34,7 @@ namespace FreeFall.Shared.Framework.Screens
 
         public void Initialize()
         {
+            EntityManager = new EntityManager();
             CurrentScreen = new TitleScreen();
         }
 

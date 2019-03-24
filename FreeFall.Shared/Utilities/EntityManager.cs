@@ -41,8 +41,8 @@ namespace FreeFall.Shared.Utilities
             foreach (Entity entity in entities)
             {
                 entity.Update(gameTime);
-                //if (player.BoundingRectangle.Intersects(entity.BoundingRectangle))
-                //    player.HandleCollision(entity);
+                if (player.BoundingRectangle.Intersects(entity.BoundingRectangle))
+                    player.HandleCollision(entity);
             }
             //Console.WriteLine("\nDrone 1 Distance: {0}\nDrone 2 Distance: {1}\nDrone 3 Distance: {2}", 
                 //entities[1].BoundingRectangle.X - entities[0].BoundingRectangle.X, 

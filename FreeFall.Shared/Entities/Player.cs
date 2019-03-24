@@ -11,8 +11,9 @@ namespace FreeFall.Shared.Entities
 
 
         public const int VELOCITY = 150;
-        public const int PLAYER_WIDTH = 30;
-        public const int PLAYER_HEIGHT = 50;
+        public const int PLAYER_WIDTH = 16;
+        public const int PLAYER_HEIGHT = 22;
+        public const string PLAYER_PATH = "Images/MalePlayer";
 
         public Vector2 Position
         {
@@ -59,7 +60,7 @@ namespace FreeFall.Shared.Entities
 
         public override void LoadContent(ContentManager content)
         {
-
+            texture = content.Load<Texture2D>(PLAYER_PATH);
         }
 
         public override void Update(GameTime gameTime)
@@ -73,7 +74,7 @@ namespace FreeFall.Shared.Entities
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(texture, boundingRectangle, Color.IndianRed);
+            spriteBatch.Draw(texture, boundingRectangle, Color.White);
         }
 
         public void HandleCollision(Entity entity)

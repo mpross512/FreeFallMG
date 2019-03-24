@@ -11,14 +11,14 @@ namespace FreeFall.Shared.Framework.Screens
     public class GameScreen : Screen
     {
 
-        private EntityManager entityManager;
+        //private EntityManager entityManager;
 
         private bool alternateControlScheme, movingLeft;
         private Texture2D test;
 
         public GameScreen()
         {
-            entityManager = new EntityManager();
+            //EntityManager = new EntityManager();
             alternateControlScheme = true;
             movingLeft = false;
         }
@@ -28,7 +28,7 @@ namespace FreeFall.Shared.Framework.Screens
             UtilityManager.SpriteBatch.Begin();
             //UtilityManager.SpriteBatch.Draw(test, new Rectangle(0, 0, 144, 256), Color.White);
 
-            entityManager.Draw(gameTime);
+            ScreenManager.EntityManager.Draw(gameTime);
 
             UtilityManager.SpriteBatch.End();
         }
@@ -36,19 +36,19 @@ namespace FreeFall.Shared.Framework.Screens
         public override void Initialize()
         {
             base.Initialize();
-            entityManager.Initialize();
+            ScreenManager.EntityManager.Initialize();
         }
 
         public override void LoadContent(ContentManager content)
         {
-            entityManager.LoadContent(content);
+            ScreenManager.EntityManager.LoadContent(content);
             test = content.Load<Texture2D>("Images/TestTexture");
         }
 
         public override void Update(GameTime gameTime)
         {
             HandleTouch();
-            entityManager.Update(gameTime);
+            ScreenManager.EntityManager.Update(gameTime);
         }
 
         public void HandleTouch()
