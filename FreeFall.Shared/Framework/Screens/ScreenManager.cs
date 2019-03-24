@@ -40,6 +40,7 @@ namespace FreeFall.Shared.Framework.Screens
 
         public void LoadContent(ContentManager content)
         {
+            Console.WriteLine("Loading Screen Manager Content");
             CurrentScreen.LoadContent(content);
         }
 

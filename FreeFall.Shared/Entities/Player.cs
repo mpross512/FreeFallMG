@@ -1,4 +1,5 @@
 ﻿using System;
+using FreeFall.Shared.Utilities;
 using FreeFall.Shared.Framework.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -14,6 +15,7 @@ namespace FreeFall.Shared.Entities
         public const int PLAYER_WIDTH = 16;
         public const int PLAYER_HEIGHT = 22;
         public const string PLAYER_PATH = "Images/MalePlayer";
+        public const string ANIMATION_PATH = "Animations/MalePlayerFalling";
 
         public Vector2 Position
         {
@@ -61,6 +63,8 @@ namespace FreeFall.Shared.Entities
         public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>(PLAYER_PATH);
+            animationTexture = content.Load<Texture2D>(ANIMATION_PATH);
+            animation = new Animation(animationTexture, 18, 18);
         }
 
         public override void Update(GameTime gameTime)
@@ -74,7 +78,8 @@ namespace FreeFall.Shared.Entities
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(texture, boundingRectangle, Color.White);
+            //spriteBatch.Draw(texture, boundingRectangle, Color.White);
+            spriteBatch.Draw(animationTexture, boundingRectangle, animation.GetKeyFrame(gameTime), Color.White);
         }
 
         public void HandleCollision(Entity entity)

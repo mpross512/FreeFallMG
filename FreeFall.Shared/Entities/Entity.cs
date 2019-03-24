@@ -12,14 +12,16 @@ namespace FreeFall.Shared.Entities
         public enum EntityTypes
         {
             PLAYER,
-            DRONE
+            DRONE,
+            ROCKET
         }
 
         public EntityTypes EntityType { get; protected set; }
 
-        protected Texture2D texture;
+        protected Texture2D texture, animationTexture;
         protected SpriteBatch spriteBatch = UtilityManager.SpriteBatch;
         protected Vector2 position = Vector2.Zero;
+        protected Animation animation;
 
         public Rectangle BoundingRectangle
         {

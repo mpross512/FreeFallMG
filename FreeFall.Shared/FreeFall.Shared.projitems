@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\EntityManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Drone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\GameOverScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Animation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />

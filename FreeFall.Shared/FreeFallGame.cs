@@ -114,7 +114,6 @@ namespace FreeFall.Shared
             //InputHandler.Instance.Update(gameTime);
             ScreenManager.Instance.CurrentScreen.Update(gameTime);
 
-
         }
 
         /// <summary>

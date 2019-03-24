@@ -103,10 +103,12 @@
     </None>
     <None Include="app.manifest" />
     <None Include="Content\Images\MalePlayer.png" />
+    <None Include="Content\Animations\MalePlayerFalling.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Content\Animations\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">

@@ -10,9 +10,7 @@ namespace FreeFall.Shared.Framework.Screens
 {
     public class GameScreen : Screen
     {
-
-        //private EntityManager entityManager;
-
+    
         private bool alternateControlScheme, movingLeft;
         private Texture2D test;
 
