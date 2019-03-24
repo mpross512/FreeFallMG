@@ -12,9 +12,10 @@ namespace FreeFall.Shared.Entities
         private static Random random = new Random();
 
         public const int DRONE_WIDTH = 26;
-        public const int DRONE_HEIGHT = 12;
+        public const int DRONE_HEIGHT = 17;
         public const int DRONE_VELOCITY = 100;
         public const string DRONE_PATH = "Images/Drone";
+        public const string ANIMATION_PATH = "Animations/Drone";
 
         private static int offset = 0;
         private int thisOffset;
@@ -31,7 +32,8 @@ namespace FreeFall.Shared.Entities
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(texture, boundingRectangle, Color.White);
+            //spriteBatch.Draw(texture, boundingRectangle, Color.White);
+            spriteBatch.Draw(animationTexture, boundingRectangle, animation.GetKeyFrame(gameTime), Color.White);
             //spriteBatch.Draw(Player.Instance.Texture, new Rectangle(0, (int)position.Y + (DRONE_HEIGHT), UtilityManager.SCREEN_WIDTH, DRONE_HEIGHT * 7), Color.BlanchedAlmond);
         }
 
@@ -41,13 +43,15 @@ namespace FreeFall.Shared.Entities
             Height = DRONE_HEIGHT;
             boundingRectangle.Width = Width;
             boundingRectangle.Height = Height;
-            position.Y = UtilityManager.SCREEN_HEIGHT + (thisOffset * DRONE_HEIGHT * 8);
+            position.Y = UtilityManager.SCREEN_HEIGHT + (thisOffset * DRONE_HEIGHT * 5);
             position.X = random.Next(UtilityManager.SCREEN_WIDTH - DRONE_WIDTH);
         }
 
         public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>(DRONE_PATH);
+            animationTexture = content.Load<Texture2D>(ANIMATION_PATH);
+            animation = new Animation(animationTexture, 36, 36);
         }
 
         public override void Update(GameTime gameTime)
