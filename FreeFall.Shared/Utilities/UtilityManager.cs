@@ -12,6 +12,7 @@ namespace FreeFall.Shared.Utilities
         public static UtilityManager Instance { get; private set; }
 
         public static SpriteBatch SpriteBatch { get; private set; }
+        public static SpriteFont Font { get; private set; }
 
         public const int SCREEN_WIDTH = 144;
         public const int SCREEN_HEIGHT = 256;
@@ -29,7 +30,8 @@ namespace FreeFall.Shared.Utilities
 
         public void LoadContent(ContentManager content)
         {
-
+            Console.WriteLine("Heyo");
+            Font = content.Load<SpriteFont>("Font");
         }
 
 

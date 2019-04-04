@@ -106,12 +106,17 @@
   <ItemGroup>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <None Include="Content\Font.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GameThumbnail.png" />
     <BundleResource Include="Content\Images\TestTexture.png" />
     <BundleResource Include="Content\Images\Drone.png" />
-    <BundleResource Include="Content\Images\MalePlayer.png" />
+    <BundleResource Include="Content\Images\MalePlayer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Content\Animations\Drone.png" />
+    <BundleResource Include="Content\Animations\MalePlayerFalling.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\LaunchImage-1.launchimage\Contents.json" />

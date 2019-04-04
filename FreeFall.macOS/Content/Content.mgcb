@@ -37,6 +37,13 @@
 /processorParam:TextureFormat=Color
 /build:Animations/MalePlayerFalling.png
 
+#begin Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font.spritefont
+
 #begin Images/Drone.png
 /importer:TextureImporter
 /processor:TextureProcessor

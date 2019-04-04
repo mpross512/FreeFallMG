@@ -11,6 +11,7 @@ namespace FreeFall.Shared.Utilities
 
         private Player player;
         public List<Entity> entities;
+        public int Score { get; set; }
 
         public EntityManager()
         {
@@ -20,12 +21,14 @@ namespace FreeFall.Shared.Utilities
 
         public void Initialize()
         {
+            entities.Clear();
             entities.Add(new Drone());
             entities.Add(new Drone());
             entities.Add(new Drone());
             foreach (Entity entity in entities)
                 entity.Initialize();
             player.Initialize();
+            Score = 0;
         }
 
         public void LoadContent(ContentManager content)
@@ -43,6 +46,13 @@ namespace FreeFall.Shared.Utilities
                 entity.Update(gameTime);
                 if (player.BoundingRectangle.Intersects(entity.BoundingRectangle))
                     player.HandleCollision(entity);
+                if (entity.BoundingRectangle.Y + (entity.BoundingRectangle.Height / 2) < player.BoundingRectangle.Y + (player.BoundingRectangle.Height / 2)
+                && !entity.ScoreCounted)
+                {
+                    entity.ScoreCounted = true;
+                    Score++;
+                }
+                
             }
             //Console.WriteLine("\nDrone 1 Distance: {0}\nDrone 2 Distance: {1}\nDrone 3 Distance: {2}", 
                 //entities[1].BoundingRectangle.X - entities[0].BoundingRectangle.X, 

@@ -35,6 +35,8 @@ namespace FreeFall.Shared.Entities
         protected int Width { get; set; }
         protected int Height { get; set; }
 
+        public bool ScoreCounted { get; set; }
+
         public abstract void Initialize();
 
         public abstract void LoadContent(ContentManager content);

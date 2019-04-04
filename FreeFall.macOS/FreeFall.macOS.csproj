@@ -104,6 +104,8 @@
     <None Include="app.manifest" />
     <None Include="Content\Images\MalePlayer.png" />
     <None Include="Content\Animations\MalePlayerFalling.png" />
+    <None Include="Content\Animations\Drone.png" />
+    <None Include="Content\Font.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />

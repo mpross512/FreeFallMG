@@ -4,21 +4,31 @@ using FreeFall.Shared.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 namespace FreeFall.Shared.Framework.Screens
 {
     public class GameScreen : Screen
     {
-    
-        private bool alternateControlScheme, movingLeft;
+
         private Texture2D test;
 
+        private bool movingLeft;
+        private KeyboardState prevKeyState;
+        private GestureSample gesture;
+        private bool playerMoved, alternateControlScheme; private int originalTouchX;
+        private SpriteFont font;
+        
         public GameScreen()
         {
             //EntityManager = new EntityManager();
-            alternateControlScheme = true;
             movingLeft = false;
+            playerMoved = false;
+            alternateControlScheme = false;
+            font = UtilityManager.Font;
+            originalTouchX = -1;
+            Player.Instance.Lane = Player.PlayerPosition.CENTER;
         }
 
         public override void Draw(GameTime gameTime)
@@ -28,6 +38,8 @@ namespace FreeFall.Shared.Framework.Screens
 
             ScreenManager.EntityManager.Draw(gameTime);
 
+            UtilityManager.SpriteBatch.DrawString(font, ScreenManager.EntityManager.Score + "", Vector2.Zero, Color.White);
+
             UtilityManager.SpriteBatch.End();
         }
 
@@ -35,6 +47,7 @@ namespace FreeFall.Shared.Framework.Screens
         {
             base.Initialize();
             ScreenManager.EntityManager.Initialize();
+            TouchPanel.EnabledGestures = GestureType.HorizontalDrag | GestureType.DragComplete;
         }
 
         public override void LoadContent(ContentManager content)
@@ -52,40 +65,111 @@ namespace FreeFall.Shared.Framework.Screens
         public void HandleTouch()
         {
 
-            if (alternateControlScheme)
+            if (FreeFallGame.Instance.CurrentPlatform == FreeFallGame.Platform.MAC
+            || FreeFallGame.Instance.CurrentPlatform == FreeFallGame.Platform.WINDOWS) //If macOS or Windows, use the Keyboard
             {
-                foreach (TouchLocation touch in TouchPanel.GetState())
+
+                if (prevKeyState.IsKeyDown(Keys.Right) && Keyboard.GetState().IsKeyUp(Keys.Right))
                 {
-                    if (touch.State == TouchLocationState.Released)
-                        movingLeft = !movingLeft;
+                    IncreaseLane();
                 }
+                if (prevKeyState.IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Left))
+                {
+                    DecreaseLane();
+                }
+
             }
-
-
-            if (TouchPanel.GetState().Count > 0)
+            else if (alternateControlScheme && TouchPanel.IsGestureAvailable) //Read Gestures if Gestures are available
             {
-                if (alternateControlScheme)
+                gesture = TouchPanel.ReadGesture();
+
+                if (!playerMoved)
+                {
+                    if (gesture.GestureType == GestureType.HorizontalDrag)
+                    {
+                        if (gesture.Delta.X < 0)
+                        {
+                            DecreaseLane();
+                        }
+                        if (gesture.Delta.X > 0)
+                        {
+                            IncreaseLane();
+                        }
+
+                        playerMoved = true;
+                    }
+                }
+                else playerMoved &= !(gesture.GestureType == GestureType.DragComplete); //If playerMoved, set it equal to false if DragComplete
+            }
+            else if(false)//If gestures are unavailable for some reason, just use the normal control scheme
+            {
+                if (TouchPanel.GetState().Count > 0)
                 {
                     if (movingLeft)
                         Player.Instance.VelocityX = -Player.VELOCITY;
                     else
                         Player.Instance.VelocityX = Player.VELOCITY;
                 }
-                else
+                else //If nothing is happening, set the player velocity to 0
                 {
-                    if (TouchPanel.GetState()[TouchPanel.GetState().Count - 1].Position.X <= UtilityManager.SCREEN_WIDTH / 2)
-                        Player.Instance.VelocityX = -Player.VELOCITY;
-                    else
-                        Player.Instance.VelocityX = Player.VELOCITY;
+                    Player.Instance.VelocityX = 0;
                 }
             }
             else
             {
-                Player.Instance.VelocityX = 0;
+                foreach (TouchLocation touch in TouchPanel.GetState()) {
+                    if (touch.State == TouchLocationState.Pressed)
+                        originalTouchX = (int)TouchPanel.GetState()[0].Position.X;
+                    if (!playerMoved && touch.State == TouchLocationState.Moved && originalTouchX != -1)
+                    {
+                        if (originalTouchX + 5 < touch.Position.X)
+                        {
+                            IncreaseLane();
+                            playerMoved = true;
+                        }
+                        else if (originalTouchX - 5 > touch.Position.X)
+                        {
+                            DecreaseLane();
+                            playerMoved = true;
+                        }
+                        Console.WriteLine("Original Location: {0} Position: {1}", originalTouchX, touch.Position.X);
+                    }
+                    if (touch.State == TouchLocationState.Released)
+                        playerMoved = false;
+                }
             }
 
+            prevKeyState = Keyboard.GetState();
 
         }
+
+
+        private void IncreaseLane()
+        {
+            switch (Player.Instance.Lane)
+            {
+                case Player.PlayerPosition.LEFT:
+                    Player.Instance.Lane = Player.PlayerPosition.CENTER;
+                    break;
+                case Player.PlayerPosition.CENTER:
+                    Player.Instance.Lane = Player.PlayerPosition.RIGHT;
+                    break;
+            }
+        }
+
+        private void DecreaseLane()
+        {
+            switch (Player.Instance.Lane)
+            {
+                case Player.PlayerPosition.RIGHT:
+                    Player.Instance.Lane = Player.PlayerPosition.CENTER;
+                    break;
+                case Player.PlayerPosition.CENTER:
+                    Player.Instance.Lane = Player.PlayerPosition.LEFT;
+                    break;
+            }
+        }
+
 
     }
 }

@@ -13,11 +13,11 @@ namespace FreeFall.Shared.Entities
 
         public const int DRONE_WIDTH = 26;
         public const int DRONE_HEIGHT = 17;
-        public const int DRONE_VELOCITY = 100;
+        public const int DRONE_VELOCITY = 150;
         public const string DRONE_PATH = "Images/Drone";
         public const string ANIMATION_PATH = "Animations/Drone";
-
-        private static int offset = 0;
+        
+        private static int offset;
         private int thisOffset;
         private static Drone bottomDrone;
 
@@ -25,9 +25,14 @@ namespace FreeFall.Shared.Entities
         public Drone()
         {
             thisOffset = offset++;
+            if (bottomDrone != null)
+                position.Y = bottomDrone.position.Y + (DRONE_HEIGHT * 5);
+            else
+                position.Y = UtilityManager.SCREEN_HEIGHT;
             bottomDrone = this;
             EntityType = EntityTypes.DRONE;
             boundingRectangle = new Rectangle();
+            ScoreCounted = false;
         }
 
         public override void Draw(GameTime gameTime)
@@ -43,7 +48,6 @@ namespace FreeFall.Shared.Entities
             Height = DRONE_HEIGHT;
             boundingRectangle.Width = Width;
             boundingRectangle.Height = Height;
-            position.Y = UtilityManager.SCREEN_HEIGHT + (thisOffset * DRONE_HEIGHT * 5);
             position.X = random.Next(UtilityManager.SCREEN_WIDTH - DRONE_WIDTH);
         }
 
@@ -59,9 +63,10 @@ namespace FreeFall.Shared.Entities
             position.Y -= (int) (DRONE_VELOCITY * gameTime.ElapsedGameTime.TotalSeconds);
 
             if (position.Y + Height <= 0) {
-                position.Y = bottomDrone.position.Y + (DRONE_HEIGHT * 8);
+                position.Y = bottomDrone.position.Y + (DRONE_HEIGHT * 5);
                 position.X = random.Next(UtilityManager.SCREEN_WIDTH - Width);
                 bottomDrone = this;
+                ScoreCounted = false;
             }
             boundingRectangle.X = (int) position.X;
             boundingRectangle.Y = (int) position.Y;

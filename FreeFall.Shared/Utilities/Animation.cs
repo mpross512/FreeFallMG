@@ -20,7 +20,6 @@ namespace FreeFall.Shared.Utilities
         {
             this.sourceImage = sourceImage;
             this.frameCount = frameCount;
-            Console.WriteLine("Source Image Width: " + sourceImage.Width);
             frameWidth = sourceImage.Width / frameCount;
             frameHeight = sourceImage.Height;
             this.framesPerSecond = framesPerSecond;
@@ -55,8 +54,6 @@ namespace FreeFall.Shared.Utilities
                 sourceRectangle.Y = sourceRectangle.X / sourceImage.Width;
             }
 
-            Console.WriteLine("Frame Width: " + frameWidth);
-            Console.WriteLine("\nMilliseconds Per Frame: {2} Game Time: {3}\nCalculated Value: {4}\nX: {0} Y: {1}", sourceRectangle.X, sourceRectangle.Y, millisecondsPerFrame, gameTime.TotalGameTime.Milliseconds, (int)(gameTime.TotalGameTime.Milliseconds / millisecondsPerFrame));
             return sourceRectangle;
         }
     }

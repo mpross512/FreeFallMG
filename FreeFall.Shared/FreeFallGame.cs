@@ -22,6 +22,8 @@ namespace FreeFall.Shared
         private UtilityManager utilityManager;
         private RenderTarget2D scene;
         private float resolutionProportion;
+        private Vector2 screenPosition;
+        private bool screenShaking; private int shakeStrength, shakeDuration;
 
         public enum Platform
         {
@@ -48,6 +50,9 @@ namespace FreeFall.Shared
             screenManager = new ScreenManager();
             utilityManager = new UtilityManager(this);
 
+            screenPosition = Vector2.Zero;
+            screenShaking = true;
+
             CurrentPlatform = platform;
             switch(CurrentPlatform)
             {
@@ -63,7 +68,6 @@ namespace FreeFall.Shared
             graphics.ApplyChanges();
 
             resolutionProportion = (float) Window.ClientBounds.Width / UtilityManager.SCREEN_WIDTH;
-            //Console.WriteLine("Window Size: {0} Screen Width: {1} Proportion: {2}", Window.ClientBounds.Width, UtilityManager.SCREEN_WIDTH, resolutionProportion);
         }
 
         /// <summary>
@@ -74,7 +78,6 @@ namespace FreeFall.Shared
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
             scene = new RenderTarget2D(graphics.GraphicsDevice, UtilityManager.SCREEN_WIDTH, UtilityManager.SCREEN_HEIGHT);
 
@@ -88,7 +91,7 @@ namespace FreeFall.Shared
         /// </summary>
         protected override void LoadContent()
         {
-            //TODO: use this.Content to load your game content here 
+            utilityManager.LoadContent(this.Content);
         }
 
         /// <summary>
@@ -100,18 +103,22 @@ namespace FreeFall.Shared
         {
             // For Mobile devices, this logic will close the Game when the Back button is pressed
             // Exit() is obsolete on iOS
-        #if !__IOS__ && !__TVOS__
+            #if !__IOS__ && !__TVOS__
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-#endif
+            #endif
 
             resolutionProportion = (float)Window.ClientBounds.Width / UtilityManager.SCREEN_WIDTH;
 
+            if(screenShaking)
+            {
+                //screenPosition.X = (int) (4 * Math.Sin(gameTime.TotalGameTime.TotalMilliseconds * (Math.PI / 1)));
+                //Console.WriteLine(screenPosition.X);
+            }
 
-            //InputHandler.Instance.Update(gameTime);
             ScreenManager.Instance.CurrentScreen.Update(gameTime);
 
         }
@@ -128,20 +135,28 @@ namespace FreeFall.Shared
             screenManager.CurrentScreen.Draw(gameTime);
 
             GraphicsDevice.SetRenderTarget(null);
+            GraphicsDevice.Clear(Color.Aquamarine);
 
             UtilityManager.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
             UtilityManager.SpriteBatch.Draw(
                 scene, 
-                new Rectangle(0, 0, 
-                    (int) (resolutionProportion * (float) UtilityManager.SCREEN_WIDTH), 
-                    (int) (resolutionProportion * (float) UtilityManager.SCREEN_HEIGHT)), 
+                new Rectangle((int) screenPosition.X, (int) screenPosition.Y, 
+                    (int) (resolutionProportion * UtilityManager.SCREEN_WIDTH), 
+                    (int) (resolutionProportion * UtilityManager.SCREEN_HEIGHT)), 
                 Color.White);
             UtilityManager.SpriteBatch.End();
-
-            //Console.WriteLine("Actual Resolution: {0} Height: {1} Proportion: {2}", Window.ClientBounds.Width, Window.ClientBounds.Height, (float) Window.ClientBounds.Height / Window.ClientBounds.Width);
-        
         }
 
+        public void ShakeScreen(int duration) 
+        {
+            ShakeScreen(duration, 5);
+        }
+
+        public void ShakeScreen(int duration, int strength)
+        {
+            shakeStrength = strength;
+            screenShaking = true;
+        }
 
     }
 }
