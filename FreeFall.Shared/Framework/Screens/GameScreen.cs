@@ -19,13 +19,15 @@ namespace FreeFall.Shared.Framework.Screens
         private GestureSample gesture;
         private bool playerMoved, alternateControlScheme; private int originalTouchX;
         private SpriteFont font;
+
+        private int lastMoved;
         
         public GameScreen()
         {
             //EntityManager = new EntityManager();
             movingLeft = false;
             playerMoved = false;
-            alternateControlScheme = false;
+            alternateControlScheme = true;
             font = UtilityManager.Font;
             originalTouchX = -1;
             Player.Instance.Lane = Player.PlayerPosition.CENTER;
@@ -58,11 +60,11 @@ namespace FreeFall.Shared.Framework.Screens
 
         public override void Update(GameTime gameTime)
         {
-            HandleTouch();
+            HandleTouch(gameTime);
             ScreenManager.EntityManager.Update(gameTime);
         }
 
-        public void HandleTouch()
+        public void HandleTouch(GameTime gameTime)
         {
 
             if (FreeFallGame.Instance.CurrentPlatform == FreeFallGame.Platform.MAC
@@ -79,27 +81,25 @@ namespace FreeFall.Shared.Framework.Screens
                 }
 
             }
-            else if (alternateControlScheme && TouchPanel.IsGestureAvailable) //Read Gestures if Gestures are available
+            else if (alternateControlScheme) //Read Gestures if Gestures are available
             {
-                gesture = TouchPanel.ReadGesture();
-
-                if (!playerMoved)
+                 foreach(TouchLocation touch in TouchPanel.GetState())
                 {
-                    if (gesture.GestureType == GestureType.HorizontalDrag)
+                    Console.WriteLine("lastMoved: {0} Current Time: {1}", lastMoved, gameTime.TotalGameTime.Seconds);
+                    if (lastMoved + 200 < gameTime.TotalGameTime.Milliseconds + (gameTime.TotalGameTime.Seconds * 1000))
                     {
-                        if (gesture.Delta.X < 0)
-                        {
-                            DecreaseLane();
-                        }
-                        if (gesture.Delta.X > 0)
+                        if (touch.State == TouchLocationState.Pressed && touch.Position.X > UtilityManager.SCREEN_WIDTH / 2)
                         {
                             IncreaseLane();
+                            lastMoved = gameTime.TotalGameTime.Milliseconds + (gameTime.TotalGameTime.Seconds * 1000);
                         }
-
-                        playerMoved = true;
+                        else if (touch.State == TouchLocationState.Pressed)
+                        {
+                            DecreaseLane();
+                        lastMoved = gameTime.TotalGameTime.Milliseconds + (gameTime.TotalGameTime.Seconds * 1000);
+                        }
                     }
                 }
-                else playerMoved &= !(gesture.GestureType == GestureType.DragComplete); //If playerMoved, set it equal to false if DragComplete
             }
             else if(false)//If gestures are unavailable for some reason, just use the normal control scheme
             {

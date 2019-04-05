@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using FreeFall.Shared.Utilities;
 
 namespace FreeFall.Shared.Framework.Screens
 {
@@ -17,6 +18,8 @@ namespace FreeFall.Shared.Framework.Screens
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+
+            UtilityManager.SpriteBatch.DrawString(UtilityManager.Font, ScreenManager.EntityManager.Score + "", Vector2.Zero, Color.White);
 
             ScreenManager.EntityManager.Draw(gameTime);
 

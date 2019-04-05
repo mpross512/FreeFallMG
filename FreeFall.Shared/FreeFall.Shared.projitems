@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Screens\GameOverScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Animation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Rocket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Cloud.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
