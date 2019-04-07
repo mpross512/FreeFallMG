@@ -10,7 +10,7 @@ namespace FreeFall.Shared.Framework.Screens
 
         public static ScreenManager Instance { get; private set; }
         private Screen currentScreen;
-        public static EntityManager EntityManager { get; private set; }
+        public static EntityManager EntityManager { get; set; }
 
 
         public ScreenManager()
@@ -27,8 +27,10 @@ namespace FreeFall.Shared.Framework.Screens
             set
             {
                 currentScreen = value;
-                currentScreen.Initialize();
                 currentScreen.LoadContent(FreeFallGame.Instance.Content);
+                Console.WriteLine("Content Loaded");
+                currentScreen.Initialize();
+                Console.WriteLine("Initialized");
             }
         }
 

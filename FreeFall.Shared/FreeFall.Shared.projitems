@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Animation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Rocket.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Cloud.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Coin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />

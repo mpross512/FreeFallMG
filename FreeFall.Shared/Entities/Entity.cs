@@ -13,7 +13,9 @@ namespace FreeFall.Shared.Entities
         {
             PLAYER,
             DRONE,
-            ROCKET
+            ROCKET,
+            COIN,
+            CLOUD
         }
 
         public EntityTypes EntityType { get; protected set; }

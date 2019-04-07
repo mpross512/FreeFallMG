@@ -21,10 +21,10 @@ namespace FreeFall.Shared.Framework.Screens
         private SpriteFont font;
 
         private int lastMoved;
-        
+
         public GameScreen()
         {
-            //EntityManager = new EntityManager();
+            ScreenManager.EntityManager = new EntityManager();
             movingLeft = false;
             playerMoved = false;
             alternateControlScheme = true;
@@ -37,7 +37,7 @@ namespace FreeFall.Shared.Framework.Screens
         {
             UtilityManager.SpriteBatch.Begin();
             //UtilityManager.SpriteBatch.Draw(test, new Rectangle(0, 0, 144, 256), Color.White);
-
+            UtilityManager.SpriteBatch.Draw(Player.Instance.Texture, new Rectangle(0, 0, UtilityManager.SCREEN_WIDTH, UtilityManager.SCREEN_HEIGHT), Color.BurlyWood);
             ScreenManager.EntityManager.Draw(gameTime);
 
             UtilityManager.SpriteBatch.DrawString(font, ScreenManager.EntityManager.Score + "", Vector2.Zero, Color.White);
@@ -55,6 +55,7 @@ namespace FreeFall.Shared.Framework.Screens
         public override void LoadContent(ContentManager content)
         {
             ScreenManager.EntityManager.LoadContent(content);
+            Console.WriteLine("This is correct");
             test = content.Load<Texture2D>("Images/TestTexture");
         }
 
@@ -85,7 +86,6 @@ namespace FreeFall.Shared.Framework.Screens
             {
                  foreach(TouchLocation touch in TouchPanel.GetState())
                 {
-                    Console.WriteLine("lastMoved: {0} Current Time: {1}", lastMoved, gameTime.TotalGameTime.Seconds);
                     if (lastMoved + 200 < gameTime.TotalGameTime.Milliseconds + (gameTime.TotalGameTime.Seconds * 1000))
                     {
                         if (touch.State == TouchLocationState.Pressed && touch.Position.X > UtilityManager.SCREEN_WIDTH / 2)
@@ -132,7 +132,7 @@ namespace FreeFall.Shared.Framework.Screens
                             DecreaseLane();
                             playerMoved = true;
                         }
-                        Console.WriteLine("Original Location: {0} Position: {1}", originalTouchX, touch.Position.X);
+                        //Console.WriteLine("Original Location: {0} Position: {1}", originalTouchX, touch.Position.X);
                     }
                     if (touch.State == TouchLocationState.Released)
                         playerMoved = false;

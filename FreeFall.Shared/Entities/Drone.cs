@@ -49,6 +49,8 @@ namespace FreeFall.Shared.Entities
             boundingRectangle.Width = Width;
             boundingRectangle.Height = Height;
             position.X = random.Next(UtilityManager.SCREEN_WIDTH - DRONE_WIDTH);
+            boundingRectangle.X = (int)position.X;
+            boundingRectangle.Y = (int)position.Y;
         }
 
         public override void LoadContent(ContentManager content)

@@ -55,7 +55,9 @@ namespace FreeFall.Shared.Entities
         {
             Instance = this;
             Lane = PlayerPosition.CENTER;
-            //texture = new Texture2D(FreeFallGame.Instance.GraphicsDevice, 1, 1);
+            texture = new Texture2D(FreeFallGame.Instance.GraphicsDevice, 1, 1);
+            texture.SetData(new Color[] { Color.White });
+
             EntityType = EntityTypes.PLAYER;
             boundingRectangle = new Rectangle();
             Alive = true;
@@ -63,7 +65,6 @@ namespace FreeFall.Shared.Entities
 
         public override void Initialize()
         {
-            //texture.SetData(new Color[] { Color.White });
             Width = PLAYER_WIDTH;
             Height = PLAYER_HEIGHT;
             boundingRectangle.Width = Width;

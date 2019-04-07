@@ -17,14 +17,17 @@ namespace FreeFall.Shared.Utilities
         {
             entities = new List<Entity>();
             player = new Player();
+
+            entities.Clear();
+            entities.Add(new Cloud());
+            entities.Add(new Cloud());
+            entities.Add(new Drone());
+            entities.Add(new Drone());
+            entities.Add(new Drone());
         }
 
         public void Initialize()
         {
-            entities.Clear();
-            entities.Add(new Drone());
-            entities.Add(new Drone());
-            entities.Add(new Drone());
             foreach (Entity entity in entities)
                 entity.Initialize();
             player.Initialize();
@@ -36,6 +39,7 @@ namespace FreeFall.Shared.Utilities
             player.LoadContent(content);
             foreach (Entity entity in entities)
                 entity.LoadContent(content);
+            Console.WriteLine("Entity count: " + entities.Count);
         }
 
         public void Update(GameTime gameTime)
@@ -51,6 +55,7 @@ namespace FreeFall.Shared.Utilities
                 {
                     entity.ScoreCounted = true;
                     Score++;
+                    Console.WriteLine("Yay!");
                 }
                 
             }
@@ -62,9 +67,9 @@ namespace FreeFall.Shared.Utilities
 
         public void Draw(GameTime gameTime)
         {
-            player.Draw(gameTime);
             foreach (Entity entity in entities)
                 entity.Draw(gameTime);
+            player.Draw(gameTime);
         }
     }
 }
