@@ -48,7 +48,8 @@ namespace FreeFall.Shared.Entities
             }
             boundingRectangle.X = random.Next(UtilityManager.SCREEN_WIDTH + boundingRectangle.Width) - boundingRectangle.Width;
             boundingRectangle.Y = random.Next(UtilityManager.SCREEN_HEIGHT);
-            Console.WriteLine("Screen Height: " + UtilityManager.SCREEN_HEIGHT);
+            position.X = boundingRectangle.X;
+            position.Y = boundingRectangle.Y;
             //for(int i = 1; i < clouds.Count; i++)
             //{
             //    while(boundingRectangle.Intersects(clouds[i].BoundingRectangle))
@@ -64,7 +65,6 @@ namespace FreeFall.Shared.Entities
             texture = content.Load<Texture2D>(CLOUD_PATH_1);
             texture2 = content.Load<Texture2D>(CLOUD_PATH_2);
             texture3 = content.Load<Texture2D>(CLOUD_PATH_3);
-            Console.WriteLine("Hey bb");
         }
 
         public override void Update(GameTime gameTime)

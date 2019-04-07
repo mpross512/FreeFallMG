@@ -19,7 +19,7 @@ namespace FreeFall.Shared.Entities
         
         private static int offset;
         private int thisOffset;
-        private static Drone bottomDrone;
+        public static Drone bottomDrone;
 
 
         public Drone()
@@ -51,6 +51,7 @@ namespace FreeFall.Shared.Entities
             position.X = random.Next(UtilityManager.SCREEN_WIDTH - DRONE_WIDTH);
             boundingRectangle.X = (int)position.X;
             boundingRectangle.Y = (int)position.Y;
+            Console.WriteLine("Drone X: {0} Drone Y: {1}", boundingRectangle.X, boundingRectangle.Y);
         }
 
         public override void LoadContent(ContentManager content)

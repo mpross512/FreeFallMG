@@ -37,7 +37,7 @@ namespace FreeFall.Shared.Framework.Screens
         {
             UtilityManager.SpriteBatch.Begin();
             //UtilityManager.SpriteBatch.Draw(test, new Rectangle(0, 0, 144, 256), Color.White);
-            UtilityManager.SpriteBatch.Draw(Player.Instance.Texture, new Rectangle(0, 0, UtilityManager.SCREEN_WIDTH, UtilityManager.SCREEN_HEIGHT), Color.BurlyWood);
+            //UtilityManager.SpriteBatch.Draw(Player.Instance.Texture, new Rectangle(0, 0, UtilityManager.SCREEN_WIDTH, UtilityManager.SCREEN_HEIGHT), Color.BurlyWood);
             ScreenManager.EntityManager.Draw(gameTime);
 
             UtilityManager.SpriteBatch.DrawString(font, ScreenManager.EntityManager.Score + "", Vector2.Zero, Color.White);
@@ -55,7 +55,6 @@ namespace FreeFall.Shared.Framework.Screens
         public override void LoadContent(ContentManager content)
         {
             ScreenManager.EntityManager.LoadContent(content);
-            Console.WriteLine("This is correct");
             test = content.Load<Texture2D>("Images/TestTexture");
         }
 

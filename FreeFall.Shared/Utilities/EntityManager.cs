@@ -24,6 +24,8 @@ namespace FreeFall.Shared.Utilities
             entities.Add(new Drone());
             entities.Add(new Drone());
             entities.Add(new Drone());
+
+            Console.WriteLine("New Entities Created");
         }
 
         public void Initialize()
@@ -39,7 +41,6 @@ namespace FreeFall.Shared.Utilities
             player.LoadContent(content);
             foreach (Entity entity in entities)
                 entity.LoadContent(content);
-            Console.WriteLine("Entity count: " + entities.Count);
         }
 
         public void Update(GameTime gameTime)
@@ -55,7 +56,7 @@ namespace FreeFall.Shared.Utilities
                 {
                     entity.ScoreCounted = true;
                     Score++;
-                    Console.WriteLine("Yay!");
+                    Console.WriteLine("New score: " + Score);
                 }
                 
             }
